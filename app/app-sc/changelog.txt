@@ -1,0 +1,27 @@
+Version 1.0.0-beta
+- Changes
+    - Nothing to mention (Initial release)
+- Known issues
+    - It is not possible to set the 'measurement interval' to fraction of seconds like 3.2s
+      as it is not supported by CONTIKI timer. Therefore, to perform a new measurement at every Tx cycle e.i.
+      set the measurement rate to highest, you need to set the 'measurement interval' to 3s.
+      Hence, there will be an overhead as measurements are faster than the transmission cycle (3 < 3.2). As consequence,
+      the SC will fail to send some measurements as it is possible to have two measurements in the same cycle.
+
+Version 1.0.0
+- Changes
+    - Add TSCH callback function at slot zero to trigger measurement perform if measurement interval is set to
+      3s instead of using CONTIKI timer event. This fixes the known issue of the beta release.
+    - Use the same TSCH callback to trigger measurement Tx instead of using the CONTIKI timer event as Tx interval is 3.2s.
+    - Increment the absolute time every 1s for better resolution and set the deviation limit to 2s.
+    - Support simultaneous joining of 30 sensors.
+    - Write communication parameters to the flash after adding slave's data slot to the TSCH schedule at the end of
+      join process to fix real time corruption issue (stopped beacon Rx and getting status 6 sending measurement).
+- Known issues
+    - Nothing to mention
+
+Version 1.0.1
+- Changes
+    - Pass the measurement data (structure) by reference to the send function for rapidness and to avoid stack overflow
+- Known issues
+    - Nothing to mention
