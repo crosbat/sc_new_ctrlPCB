@@ -40,6 +40,7 @@ static meas_t gMeas = {0};
    false - old
    true - new */
 static bool gMeasType = false;
+//we need to assign gMeas to ADC read value.
 
 unsigned int en_val = 1; // for making the LED on
 
