@@ -30,10 +30,12 @@ extern "C" {
 #include "CC26X2R1_LAUNCHXL.h"
 
 
+#include "sys/log.h"
+#include <stdio.h>
+#include <ti/drivers/ADC.h>
 
-/*=============================================================================
-                          GLOBAL VARIABLES
-=============================================================================*/
+//                          GLOBAL VARIABLES
+//=============================================================================*/
 /* Measurement storage */
 static meas_t gMeas = {0};
 /* Measurement type
@@ -44,14 +46,10 @@ static bool gMeasType = false;
 
 unsigned int en_val = 1; // for making the LED on
 
-ADC_Handle adc;
-ADC_Params params;
-
-int_fast16_t res;
 uint16_t adcValue;
 
-
-
+uint16_t adcValue0;
+uint32_t adcValue0MicroVolt;
 /*=============================================================================
                           API IMPLEMENTATION
 =============================================================================*/
@@ -60,30 +58,42 @@ uint16_t adcValue;
 ------------------------------------------------------------------------------*/
 __attribute__((weak)) bool measHandler_performMeas(void)
 {
+
+
+
+
   /* Get internal absolute time */
   gMeas.timeStamp = sf_absoluteTime_getTime();
 
   //MY ADC CODE
 
+  ADC_Handle adc;
+  ADC_Params params;
+  int_fast16_t res;
+  uint_least8_t adc_index = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
 
+  ADC_Params_init(&params);
+  //adc = ADC_open(CC26X2R1_LAUNCHXL_DIO29_ANALOG, &params);
+  adc = ADC_open(adc_index, &params);
 
-//  ADC_Params_init(&params);
-//  adc = ADC_open(CC26X2R1_LAUNCHXL_DIO28_ANALOG, &params);
-//  if (adc != NULL) {
-//      ADC_close(adc);
-//  }
-//
-//
-//  res = ADC_convert(adc, &adcValue);
-//  if (res == ADC_STATUS_SUCCESS) {
-//      //use adcValue
-//  }
+  /* Blocking mode conversion */
+  res = ADC_convert(adc, &adcValue0);
+
+  if (res == ADC_STATUS_SUCCESS)
+  {
+
+      adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc, adcValue0);
+  }
+  ADC_close(adc);
+  gMeas.value = adcValue0MicroVolt;
 
 
   ////////
 
   /* Provide dummy measurement*/
-  gMeas.value = random_rand();
+//  gMeas.value = random_rand();
+
+
 
   //Make an LED turn-on
   //GPIO_write(IOID_5,en_val);

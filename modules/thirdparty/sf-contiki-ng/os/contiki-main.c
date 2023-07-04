@@ -78,6 +78,10 @@
 
 #include <stdio.h>
 #include <stdint.h>
+
+//AK 04.07.23 ADC.h header called
+#include <ti/drivers/ADC.h>
+
 /*---------------------------------------------------------------------------*/
 /* Log configuration */
 #include "sys/log.h"
@@ -103,6 +107,10 @@ main(void)
   watchdog_init();
 
   energest_init();
+
+
+  //AK 04.07.23 ADC init function added here
+  ADC_init();
 
 #if STACK_CHECK_ENABLED
   stack_check_init();

@@ -43,7 +43,31 @@ build/simplelink/launchpad/cc26x2r1/obj/measHandler.o: \
  c:\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\driverlib\rom.h \
  c:\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_types.h \
  C:/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/devices/cc13x2_cc26x2/driverlib/gpio.h \
- c:\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpio.h
+ c:\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpio.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/net/linkaddr.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/contiki.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/contiki-default-conf.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/process.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/pt.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/lc.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/lc-switch.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/cc.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/cc-gcc.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/autostart.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/process.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/timer.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/clock.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/ctimer.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/etimer.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/etimer.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/rtimer.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/dev/watchdog.h \
+ C:/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/dev/rtimer-arch.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/pt.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/clock.h \
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h \
+ C:/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/ADC.h
 \ :
  ../../modules/sf-meas/measHandler.c \ :
  ../../modules/sf-meas/measHandler_api.h \ :
@@ -89,4 +113,28 @@ build/simplelink/launchpad/cc26x2r1/obj/measHandler.o: \
 \users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\driverlib\rom.h \ :
 \users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_types.h \ :
 /Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/devices/cc13x2_cc26x2/driverlib/gpio.h \ :
-\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpio.h :
+\users\crosbat\documents\sc-v1.0.1_original\sc-v1.0.1\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpio.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/net/linkaddr.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/contiki.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/contiki-default-conf.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/process.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/pt.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/lc.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/lc-switch.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/cc.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/cc-gcc.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/autostart.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/process.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/timer.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/clock.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/ctimer.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/etimer.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/etimer.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/rtimer.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/dev/watchdog.h \ :
+/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/dev/rtimer-arch.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/pt.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/clock.h \ :
+ ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h \ :
+/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/ADC.h :

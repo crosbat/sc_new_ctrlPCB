@@ -76,6 +76,7 @@ build/simplelink/launchpad/cc26x2r1/obj/contiki-main.o: \
  ../../modules/thirdparty/sf-contiki-ng/os/net/mac/tsch/tsch-stats.h \
  ../../modules/sf-tsch/sf-tsch-timeslot.h \
  ../../modules/thirdparty/sf-contiki-ng/os/net/queuebuf.h \
+ C:/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/ADC.h \
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h
 \ :
@@ -156,5 +157,6 @@ build/simplelink/launchpad/cc26x2r1/obj/contiki-main.o: \
  ../../modules/thirdparty/sf-contiki-ng/os/net/mac/tsch/tsch-stats.h \ :
  ../../modules/sf-tsch/sf-tsch-timeslot.h \ :
  ../../modules/thirdparty/sf-contiki-ng/os/net/queuebuf.h \ :
+/Users/Crosbat/Documents/sc-v1.0.1_original/sc-v1.0.1/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/ADC.h \ :
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \ :
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h :
