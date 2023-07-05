@@ -88,7 +88,7 @@ __attribute__((weak)) bool measHandler_performMeas(void)
   gMeas.value = adcValue0MicroVolt;
 
 
-  ////////
+  //////// previous implementation by SF
 
   /* Provide dummy measurement*/
 //  gMeas.value = random_rand();
