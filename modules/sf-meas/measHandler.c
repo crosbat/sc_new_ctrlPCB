@@ -46,10 +46,10 @@ static bool gMeasType = false;
 
 unsigned int en_val = 1; // for making the LED on
 
-uint16_t adcValue;
 
-uint16_t adcValue0;
-uint32_t adcValue0MicroVolt;
+
+//uint16_t adcValue0;
+extern uint32_t adcValue0MicroVolt;
 /*=============================================================================
                           API IMPLEMENTATION
 =============================================================================*/
@@ -65,26 +65,26 @@ __attribute__((weak)) bool measHandler_performMeas(void)
   /* Get internal absolute time */
   gMeas.timeStamp = sf_absoluteTime_getTime();
 
-  //MY ADC CODE
-
-  ADC_Handle adc;
-  ADC_Params params;
-  int_fast16_t res;
-  uint_least8_t adc_index = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
-
-  ADC_Params_init(&params);
-  //adc = ADC_open(CC26X2R1_LAUNCHXL_DIO29_ANALOG, &params);
-  adc = ADC_open(adc_index, &params);
-
-  /* Blocking mode conversion */
-  res = ADC_convert(adc, &adcValue0);
-
-  if (res == ADC_STATUS_SUCCESS)
-  {
-
-      adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc, adcValue0);
-  }
-  ADC_close(adc);
+//  //MY ADC CODE
+//
+//  ADC_Handle adc;
+//  ADC_Params params;
+//  int_fast16_t res;
+//  uint_least8_t adc_index = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
+//
+//  ADC_Params_init(&params);
+//  //adc = ADC_open(CC26X2R1_LAUNCHXL_DIO29_ANALOG, &params);
+//  adc = ADC_open(adc_index, &params);
+//
+//  /* Blocking mode conversion */
+//  res = ADC_convert(adc, &adcValue0);
+//
+//  if (res == ADC_STATUS_SUCCESS)
+//  {
+//
+//      adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc, adcValue0);
+//  }
+//  ADC_close(adc);
   gMeas.value = adcValue0MicroVolt;
 
 
@@ -93,10 +93,6 @@ __attribute__((weak)) bool measHandler_performMeas(void)
   /* Provide dummy measurement*/
 //  gMeas.value = random_rand();
 
-
-
-  //Make an LED turn-on
-  //GPIO_write(IOID_5,en_val);
 
   /* Set meas as new */
   gMeasType = true;

@@ -109,6 +109,9 @@ extern void Board_initHook(void);
 /*
  * \brief  Fade a specified LED.
  */
+
+void sb_processTest(void);
+
 static void
 fade(PIN_Id pin)
 {
@@ -280,6 +283,10 @@ platform_init_stage_two(void)
   ieee_addr_cpy_to(linkaddr_node_addr.u8, LINKADDR_SIZE);
 
   button_hal_init();
+
+  /* This function starts the timer process for doing fast ADC sampling */
+
+  sb_processTest();
 
   fade(Board_PIN_LED0);
 }

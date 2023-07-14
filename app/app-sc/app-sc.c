@@ -86,19 +86,33 @@ PIN_Config ButtonTableWakeUp[] = {
 // Handling the data from Master
 
 uint8_t dispDownlink = 0;
+int sb_process_test = 0;
 
+uint16_t adcValue0;
+uint32_t adcValue0MicroVolt;
+uint16_t adcValue1;
+uint32_t adcValue1MicroVolt;
 
 
 /*=============================================================================
                               PROCESS DECLARATION
 =============================================================================*/
 PROCESS(sc_app_process, "The main smart cell process");
+PROCESS(adc_sb_process, "Fast adc read SB");
 AUTOSTART_PROCESSES(&sc_app_process);
+
 PROCESS(button_process, "The button handler");
+
+
+
+
+
 
 /*=============================================================================
                         LOCAL FUNCTIONS IMPLEMENTATION
 =============================================================================*/
+
+
 /*============================================================================*/
 /**
  * \brief Perform factory reset then go into shutdown mode.
@@ -208,10 +222,13 @@ PROCESS_THREAD(button_process, ev, data)
         }
       }
     }
+
   }
 
   PROCESS_END();
 }/* button_process() */
+
+
 
 /*------------------------------------------------------------------------------
   sc_app_process()
@@ -272,6 +289,8 @@ PROCESS_THREAD(sc_app_process, ev, data)
 
   /* Start button handle process. */
   process_start(&button_process, NULL);
+
+
 
   /* Read device configuration */
   if(E_SF_SUCCESS == sf_configMgmt_readConfig())
@@ -349,6 +368,10 @@ PROCESS_THREAD(sc_app_process, ev, data)
   PROCESS_YIELD_UNTIL(E_CONFIGMGMT_DEVICESTATUS_CONNECTED ==
                         sf_configMgmt_getDeviceStatus());
 
+
+
+
+
   /* Start measurement Tx process */
   sf_measSender_start();
 
@@ -372,8 +395,88 @@ PROCESS_THREAD(sc_app_process, ev, data)
   gpio_hal_arch_pin_set_output( NULL, TSCH_TIMING_PIN_4 );
 #endif
 
+
+
+
+
   PROCESS_END();
 }/* sc_app_process() */
+
+
+/*
+ adc_sb_process
+ Here we sample 2 ADC channels: channel index 6 for cell current and channel index 7 for cell voltage.
+ Right now gMeas.value takes only the cell voltage output in microvolts.
+ We are not sending the cell current information to the master.
+
+ TBD: How to send different data from slave to master instead of just single float variable.
+ *
+ */
+
+PROCESS_THREAD(adc_sb_process, ev, data)
+{
+    static struct etimer et;
+    int sampling_freq = 10000; //10kHz sampling
+
+    PROCESS_BEGIN();
+    etimer_set(&et, CLOCK_SECOND/sampling_freq); /* Trigger a timer after 0.1 millisecond. */
+    while(1) {
+      PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
+      etimer_reset(&et);
+
+      /* Just a dummy variable to see if the process is working fine*/
+      if(sb_process_test < 10000)
+          sb_process_test++;
+      else
+          sb_process_test = 0;
+
+      //MY ADC CODE: For reading cell current and voltages.
+
+      ADC_Handle adc_ct;
+      ADC_Handle adc_vtg;
+      ADC_Params params;
+      int_fast16_t res_ct;
+      int_fast16_t res_vtg;
+      uint_least8_t adc_index_ct = 6; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
+      uint_least8_t adc_index_vtg = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
+
+      ADC_Params_init(&params);
+      adc_ct = ADC_open(adc_index_ct, &params);
+      adc_vtg = ADC_open(adc_index_vtg, &params);
+
+      /* Blocking mode conversion */
+      res_ct = ADC_convert(adc_ct, &adcValue1);
+
+
+      if (res_ct == ADC_STATUS_SUCCESS)
+      {
+
+          adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc_ct, adcValue1);
+      }
+      ADC_close(adc_ct);
+
+      res_vtg = ADC_convert(adc_vtg, &adcValue0);
+
+      if (res_vtg == ADC_STATUS_SUCCESS)
+      {
+
+          adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc_vtg, adcValue0);
+      }
+
+
+      ADC_close(adc_vtg);
+
+    }
+
+    PROCESS_END();
+
+}
+
+void sb_processTest(void)
+{
+    process_start(&adc_sb_process,NULL); //starts the adc process
+}
+
 
 /*=============================================================================
                               API IMPLEMENTATION
