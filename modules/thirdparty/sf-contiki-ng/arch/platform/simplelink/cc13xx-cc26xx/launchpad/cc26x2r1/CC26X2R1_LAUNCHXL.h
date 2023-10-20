@@ -114,7 +114,7 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_PIN_RLED              IOID_6
 #define CC26X2R1_LAUNCHXL_PIN_GLED              IOID_7
 #define CC26X2R1_LAUNCHXL_SB_PWM                IOID_21 //Newly added pwm top
-#define CC26X2R1_LAUNCHXL_SB_PWM_BOT            IOID_22 //Newly added pwm top
+#define CC26X2R1_LAUNCHXL_SB_PWM_BOT            IOID_22 //Newly added pwm bottom
 #define CC26X2R1_LAUNCHXL_SB_LED1               IOID_5 //Newly added
 #define CC26X2R1_LAUNCHXL_SB_LED2               IOID_4 //Newly added
 
