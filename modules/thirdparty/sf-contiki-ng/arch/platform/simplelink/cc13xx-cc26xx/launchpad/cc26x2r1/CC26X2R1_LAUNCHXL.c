@@ -223,6 +223,8 @@ const ADC_Config ADC_config[CC26X2R1_LAUNCHXL_ADCCOUNT] = {
 const uint_least8_t ADC_count = CC26X2R1_LAUNCHXL_ADCCOUNT;
 
 
+
+
 /*
  *  =============================== ECDH ===============================
  */
@@ -533,35 +535,125 @@ const GPIOCC26XX_Config GPIOCC26XX_config = {
     .intPriority        = (~0)
 };
 
+
+/*Timer related settings*/
 /*
  *  =============================== GPTimer ===============================
  *  Remove unused entries to reduce flash usage both in Board.c and Board.h
  */
 #include <ti/drivers/timer/GPTimerCC26XX.h>
 
-GPTimerCC26XX_Object gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMERCOUNT];
+//GPTimerCC26XX_Object gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMERCOUNT];
+//
+//const GPTimerCC26XX_HWAttrs gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMERPARTSCOUNT] = {
+//    { .baseAddr = GPT0_BASE, .intNum = INT_GPT0A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT0, .pinMux = GPT_PIN_0A, },
+//    { .baseAddr = GPT0_BASE, .intNum = INT_GPT0B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT0, .pinMux = GPT_PIN_0B, },
+//    { .baseAddr = GPT1_BASE, .intNum = INT_GPT1A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT1, .pinMux = GPT_PIN_1A, },
+//    { .baseAddr = GPT1_BASE, .intNum = INT_GPT1B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT1, .pinMux = GPT_PIN_1B, },
+//    { .baseAddr = GPT2_BASE, .intNum = INT_GPT2A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT2, .pinMux = GPT_PIN_2A, },
+//    { .baseAddr = GPT2_BASE, .intNum = INT_GPT2B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT2, .pinMux = GPT_PIN_2B, },
+//    { .baseAddr = GPT3_BASE, .intNum = INT_GPT3A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3A, },
+//    { .baseAddr = GPT3_BASE, .intNum = INT_GPT3B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3B, },
+//};
+//
+//const GPTimerCC26XX_Config GPTimerCC26XX_config[CC26X2R1_LAUNCHXL_GPTIMERPARTSCOUNT] = {
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER0], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER0A], GPT_A },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER0], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER0B], GPT_B },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER1], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER1A], GPT_A },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER1], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER1B], GPT_B },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER2], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER2A], GPT_A },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER2], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER2B], GPT_B },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER3], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER3A], GPT_A },
+//    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER3], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER3B], GPT_B },
+//};
 
-const GPTimerCC26XX_HWAttrs gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMERPARTSCOUNT] = {
-    { .baseAddr = GPT0_BASE, .intNum = INT_GPT0A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT0, .pinMux = GPT_PIN_0A, },
-    { .baseAddr = GPT0_BASE, .intNum = INT_GPT0B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT0, .pinMux = GPT_PIN_0B, },
-    { .baseAddr = GPT1_BASE, .intNum = INT_GPT1A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT1, .pinMux = GPT_PIN_1A, },
-    { .baseAddr = GPT1_BASE, .intNum = INT_GPT1B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT1, .pinMux = GPT_PIN_1B, },
-    { .baseAddr = GPT2_BASE, .intNum = INT_GPT2A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT2, .pinMux = GPT_PIN_2A, },
-    { .baseAddr = GPT2_BASE, .intNum = INT_GPT2B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT2, .pinMux = GPT_PIN_2B, },
-    { .baseAddr = GPT3_BASE, .intNum = INT_GPT3A, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3A, },
-    { .baseAddr = GPT3_BASE, .intNum = INT_GPT3B, .intPriority = (~0), .powerMngrId = PowerCC26XX_PERIPH_GPT3, .pinMux = GPT_PIN_3B, },
+
+
+
+
+/*Timer related settings*/
+
+#include <ti/drivers/Timer.h>
+#include <ti/drivers/timer/TimerCC26XX.h>
+#define CONFIG_TIMER_COUNT 1
+
+/*
+ *  ======== timerCC26XXObjects ========
+ */
+TimerCC26XX_Object timerCC26XXObjects[CONFIG_TIMER_COUNT];
+
+/*
+ *  ======== timerCC26XXHWAttrs ========
+ */
+const TimerCC26XX_HWAttrs timerCC26XXHWAttrs[CONFIG_TIMER_COUNT] = {
+    {
+        .gpTimerUnit = CONFIG_GPTIMER_0,
+        .subTimer    = TimerCC26XX_timer32
+
+    },
 };
 
-const GPTimerCC26XX_Config GPTimerCC26XX_config[CC26X2R1_LAUNCHXL_GPTIMERPARTSCOUNT] = {
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER0], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER0A], GPT_A },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER0], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER0B], GPT_B },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER1], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER1A], GPT_A },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER1], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER1B], GPT_B },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER2], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER2A], GPT_A },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER2], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER2B], GPT_B },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER3], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER3A], GPT_A },
-    { &gptimerCC26XXObjects[CC26X2R1_LAUNCHXL_GPTIMER3], &gptimerCC26xxHWAttrs[CC26X2R1_LAUNCHXL_GPTIMER3B], GPT_B },
+/*
+ *  ======== Timer_config ========
+ */
+const Timer_Config Timer_config[CONFIG_TIMER_COUNT] = {
+    /* CONFIG_TIMER_0 */
+    {
+        .object    = &timerCC26XXObjects[CONFIG_TIMER_0],
+        .hwAttrs   = &timerCC26XXHWAttrs[CONFIG_TIMER_0]
+    },
 };
+
+const uint_least8_t CONFIG_TIMER_0_CONST = CONFIG_TIMER_0;
+const uint_least8_t Timer_count = CONFIG_TIMER_COUNT;
+
+
+/*
+ *  =============================== GPTimer ===============================
+ */
+
+#include <ti/drivers/timer/GPTimerCC26XX.h>
+#include <ti/drivers/power/PowerCC26XX.h>
+#include <ti/devices/cc13x2_cc26x2/inc/hw_memmap.h>
+#include <ti/devices/cc13x2_cc26x2/inc/hw_ints.h>
+
+#define CONFIG_GPTIMER_COUNT 1
+
+/*
+ *  ======== gptimerCC26XXObjects ========
+ */
+GPTimerCC26XX_Object gptimerCC26XXObjects[CONFIG_GPTIMER_COUNT];
+
+/*
+ *  ======== gptimerCC26XXHWAttrs ========
+ */
+const GPTimerCC26XX_HWAttrs gptimerCC26XXHWAttrs[CONFIG_GPTIMER_COUNT] = {
+    /* CONFIG_GPTIMER_0, used by CONFIG_TIMER_0 */
+    {
+        .baseAddr = GPT0_BASE,
+        .intNum      = INT_GPT0A,
+        .intPriority = (~0),
+        .powerMngrId = PowerCC26XX_PERIPH_GPT0,
+        .pinMux      = GPT_PIN_0A
+    },
+};
+
+/*
+ *  ======== GPTimer_config ========
+ */
+const GPTimerCC26XX_Config GPTimerCC26XX_config[CONFIG_GPTIMER_COUNT] = {
+    /* CONFIG_GPTIMER_0 */
+    {
+        .object    = &gptimerCC26XXObjects[CONFIG_GPTIMER_0],
+        .hwAttrs   = &gptimerCC26XXHWAttrs[CONFIG_GPTIMER_0],
+        .timerPart = GPT_A
+    },
+};
+
+const uint_least8_t CONFIG_GPTIMER_0_CONST = CONFIG_GPTIMER_0;
+const uint_least8_t GPTimer_count = CONFIG_GPTIMER_COUNT;
+
+
 
 /*
  *  =============================== I2C ===============================

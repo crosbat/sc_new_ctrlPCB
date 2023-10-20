@@ -76,6 +76,9 @@
 #include <ti/drivers/SPI.h>
 #include <ti/drivers/TRNG.h>
 #include <ti/drivers/UART.h>
+#include <ti/drivers/Timer.h>
+
+
 /*---------------------------------------------------------------------------*/
 #include "board-peripherals.h"
 #include "clock-arch.h"
@@ -105,6 +108,7 @@ bool gUartConnected = false;
  * the <BOARD>_fxns.c file.
  */
 extern void Board_initHook(void);
+
 /*---------------------------------------------------------------------------*/
 /*
  * \brief  Fade a specified LED.
@@ -186,11 +190,15 @@ platform_init_stage_one(void)
   /* Perform board-specific initialization */
   Board_initHook();
 
+//  /* Call driver init functions */
+//    Timer_init();
+
   /* Contiki drivers init */
   gpio_hal_init();
   leds_init();
 
   fade(Board_PIN_LED0);
+
 
 #if UART_DEPENDS_ON_UART_CONNECTION
   IOCIOPortPullSet(CC1310_TESTOSENSOR_UART_RX, IOC_IOPULL_DOWN);
@@ -226,6 +234,8 @@ platform_init_stage_one(void)
 #endif
 
   TRNG_init();
+
+
 
   fade(Board_PIN_LED1);
 
@@ -288,6 +298,12 @@ platform_init_stage_two(void)
 
   sb_processTest();
 
+
+
+
+
+
+
   fade(Board_PIN_LED0);
 }
 /*---------------------------------------------------------------------------*/
@@ -331,6 +347,9 @@ platform_init_stage_three(void)
 #endif
 
   fade(Board_PIN_LED1);
+
+
+
 }
 /*---------------------------------------------------------------------------*/
 void

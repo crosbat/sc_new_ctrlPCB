@@ -81,6 +81,13 @@
 
 //AK 04.07.23 ADC.h header called
 #include <ti/drivers/ADC.h>
+//AK 18.07.2023. Include Timer.h from TI drivers for fast ADC/GPIO configuration
+#include <ti/drivers/Timer.h>
+#include "CC26X2R1_LAUNCHXL.h"
+#include <ti/drivers/timer/GPTimerCC26XX.h>
+
+void timerCallback(Timer_Handle myHandle, int_fast16_t status);
+int ti_timer_check = 0;
 
 /*---------------------------------------------------------------------------*/
 /* Log configuration */
@@ -99,6 +106,8 @@ main(void)
 #endif
   platform_init_stage_one();
 
+
+
   clock_init();
   rtimer_init();
   process_init();
@@ -111,6 +120,7 @@ main(void)
 
   //AK 04.07.23 ADC init function added here
   ADC_init();
+
 
 #if STACK_CHECK_ENABLED
   stack_check_init();
@@ -160,6 +170,7 @@ main(void)
 
   platform_init_stage_three();
 
+
 #if BUILD_WITH_RPL_BORDER_ROUTER
   rpl_border_router_init();
   LOG_DBG("With RPL Border Router\n");
@@ -198,6 +209,58 @@ main(void)
 
   watchdog_start();
 
+
+
+
+
+
+/*Timer code:
+ * TBD: Move to a separate function
+ *
+ *                        */
+
+//  //Timer_init();
+//  Timer_Handle timer0;
+//  Timer_Params params;
+//
+//
+//
+//  /*
+//   * Setting up the timer in continuous callback mode that calls the callback
+//   * function every 1,000,000 microseconds, or 1 second.
+//   */
+//  Timer_Params_init(&params);
+//  params.period        = 1000000;
+//  params.periodUnits   = Timer_PERIOD_US;
+//  params.timerMode     = Timer_CONTINUOUS_CALLBACK;
+//  params.timerCallback = timerCallback;
+//
+//  timer0 = Timer_open(CONFIG_TIMER_0, &params);
+//
+//  if (timer0 == NULL)
+//  {
+//      /* Failed to initialized timer */
+//      while (1) {}
+//  }
+//
+//  if (Timer_start(timer0) == Timer_STATUS_ERROR)
+//  {
+//      /* Failed to start timer */
+//      while (1) {}
+//  }
+
+//////
+
+
+
+
+
+
+
+
+  //Main loop calling all the contiki processes.
+
+
 #if PLATFORM_PROVIDES_MAIN_LOOP
   platform_main_loop();
 #else
@@ -218,3 +281,13 @@ main(void)
 /**
  * @}
  */
+
+
+/*timer0 call back function*/
+void timerCallback(Timer_Handle myHandle, int_fast16_t status)
+{
+    if(ti_timer_check<60)
+        ti_timer_check++;
+    else
+        ti_timer_check=0;
+}

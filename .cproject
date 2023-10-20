@@ -71,7 +71,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="cc26x2x7.lds|app/sample-sensor|app/security-test|app/nullnet-example-sensor" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/Timer.c|cc26x2x7.lds|app/sample-sensor|app/security-test|app/nullnet-example-sensor" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

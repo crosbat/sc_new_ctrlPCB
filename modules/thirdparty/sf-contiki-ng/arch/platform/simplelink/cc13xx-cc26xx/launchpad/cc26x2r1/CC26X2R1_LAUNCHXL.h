@@ -84,10 +84,10 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_DIO1_RFSW             IOID_1
 #define CC26X2R1_LAUNCHXL_DIO12                 IOID_12
 #define CC26X2R1_LAUNCHXL_DIO15                 IOID_15
-//#define CC26X2R1_LAUNCHXL_DIO16_TDO             IOID_16 //orig JTAG pins. we have LED2 here
-//#define CC26X2R1_LAUNCHXL_DIO17_TDI             IOID_17 //orig JTAG pins. we have LED1 here
-#define CC26X2R1_LAUNCHXL_DIO21                 IOID_21
-#define CC26X2R1_LAUNCHXL_DIO22                 IOID_22
+#define CC26X2R1_LAUNCHXL_DIO16_TDO             IOID_16 //orig JTAG pins.
+#define CC26X2R1_LAUNCHXL_DIO17_TDI             IOID_17 //orig JTAG pins.
+//#define CC26X2R1_LAUNCHXL_DIO21                 IOID_21
+//#define CC26X2R1_LAUNCHXL_DIO22                 IOID_22
 
 /* Discrete Inputs */
 #define CC26X2R1_LAUNCHXL_PIN_BTN1              IOID_13
@@ -113,9 +113,10 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_PIN_LED_OFF           0
 #define CC26X2R1_LAUNCHXL_PIN_RLED              IOID_6
 #define CC26X2R1_LAUNCHXL_PIN_GLED              IOID_7
-#define CC26X2R1_LAUNCHXL_SB_PWM                IOID_11 //Newly added
-#define CC26X2R1_LAUNCHXL_SB_LED1               IOID_17 //Newly added
-#define CC26X2R1_LAUNCHXL_SB_LED2               IOID_16 //Newly added
+#define CC26X2R1_LAUNCHXL_SB_PWM                IOID_21 //Newly added pwm top
+#define CC26X2R1_LAUNCHXL_SB_PWM_BOT            IOID_22 //Newly added pwm top
+#define CC26X2R1_LAUNCHXL_SB_LED1               IOID_5 //Newly added
+#define CC26X2R1_LAUNCHXL_SB_LED2               IOID_4 //Newly added
 
 /* PWM Outputs */
 #define CC26X2R1_LAUNCHXL_PWMPIN0               CC26X2R1_LAUNCHXL_PIN_RLED
@@ -133,9 +134,9 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_FLASH_CS_OFF          1
 
 /* SPI Board */
-#define CC26X2R1_LAUNCHXL_SPI0_MISO             IOID_2          /* RF1.20 */ // orig  IOID_8//R7 2
-#define CC26X2R1_LAUNCHXL_SPI0_MOSI             IOID_3          /* RF1.18 */ // orig IOID_9// R7 3
-#define CC26X2R1_LAUNCHXL_SPI0_CLK              IOID_1         /* RF1.16 */ //orig  IOID_10// R7 1
+#define CC26X2R1_LAUNCHXL_SPI0_MISO             IOID_8          /* RF1.20 */ // orig  IOID_8//R7 2
+#define CC26X2R1_LAUNCHXL_SPI0_MOSI             IOID_9          /* RF1.18 */ // orig IOID_9// R7 3
+#define CC26X2R1_LAUNCHXL_SPI0_CLK              IOID_10         /* RF1.16 */ //orig  IOID_10// R7 1
 #define CC26X2R1_LAUNCHXL_SPI0_CSN              IOID_11
 #define CC26X2R1_LAUNCHXL_SPI1_MISO             PIN_UNASSIGNED
 #define CC26X2R1_LAUNCHXL_SPI1_MOSI             PIN_UNASSIGNED
@@ -143,8 +144,8 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_SPI1_CSN              PIN_UNASSIGNED
 
 /* UART Board */
-#define CC26X2R1_LAUNCHXL_UART0_RX              IOID_9          /* RXD */ // orig IOID_2//R7 9
-#define CC26X2R1_LAUNCHXL_UART0_TX              IOID_10          /* TXD */ // orig IOID_3//R7 10
+#define CC26X2R1_LAUNCHXL_UART0_RX              IOID_2          /* RXD */ // orig IOID_2//R7 9
+#define CC26X2R1_LAUNCHXL_UART0_TX              IOID_3          /* TXD */ // orig IOID_3//R7 10
 #define CC26X2R1_LAUNCHXL_UART0_CTS             IOID_19         /* CTS */
 #define CC26X2R1_LAUNCHXL_UART0_RTS             IOID_18         /* RTS */
 #define CC26X2R1_LAUNCHXL_UART1_RX              PIN_UNASSIGNED
@@ -156,6 +157,33 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC26X2R1_LAUNCHXL_UART_TX               CC26X2R1_LAUNCHXL_UART0_TX
 #define CC26X2R1_LAUNCHXL_UART_CTS              CC26X2R1_LAUNCHXL_UART0_CTS
 #define CC26X2R1_LAUNCHXL_UART_RTS              CC26X2R1_LAUNCHXL_UART0_RTS
+
+
+/*
+ *  ======== Timer ========
+ */
+
+extern const uint_least8_t                  CONFIG_TIMER_0_CONST;
+#define CONFIG_TIMER_0                      0
+#define CONFIG_TI_DRIVERS_TIMER_COUNT       1
+
+
+/*
+ *  ======== GPTimer ========
+ */
+
+extern const uint_least8_t                  CONFIG_GPTIMER_0_CONST;
+#define CONFIG_GPTIMER_0                    0
+#define CONFIG_TI_DRIVERS_GPTIMER_COUNT     1
+
+
+
+
+
+
+
+
+
 
 /*!
  *  @brief  Initialize the general board specific settings

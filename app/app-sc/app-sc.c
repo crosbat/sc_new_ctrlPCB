@@ -53,7 +53,8 @@
 #include DeviceFamily_constructPath(driverlib/sys_ctrl.h)
 #include <ti/drivers/GPIO.h>
 #include <ti/drivers/ADC.h>
-
+//AK 18.07.2023. Include Timer.h from TI drivers for fast ADC/GPIO configuration
+#include <ti/drivers/Timer.h>
 
 /*=============================================================================
                                MACROS
@@ -416,10 +417,10 @@ PROCESS_THREAD(sc_app_process, ev, data)
 PROCESS_THREAD(adc_sb_process, ev, data)
 {
     static struct etimer et;
-    int sampling_freq = 10000; //10kHz sampling
+    int sampling_freq = 10000; //use 10000 for 10kHz sampling
 
     PROCESS_BEGIN();
-    etimer_set(&et, CLOCK_SECOND/sampling_freq); /* Trigger a timer after 0.1 millisecond. */
+    etimer_set(&et, (clock_time_t)CLOCK_SECOND/sampling_freq); /* Trigger a timer after 0.1 millisecond. */
     while(1) {
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       etimer_reset(&et);
@@ -429,6 +430,12 @@ PROCESS_THREAD(adc_sb_process, ev, data)
           sb_process_test++;
       else
           sb_process_test = 0;
+
+      if(dispDownlink < 18)
+      {
+          GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM); //This should create a PWM initially once this process starts
+      }
+
 
       //MY ADC CODE: For reading cell current and voltages.
 
@@ -476,6 +483,9 @@ void sb_processTest(void)
 {
     process_start(&adc_sb_process,NULL); //starts the adc process
 }
+
+
+
 
 
 /*=============================================================================
