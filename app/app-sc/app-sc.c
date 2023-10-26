@@ -93,6 +93,8 @@ uint16_t adcValue0;
 uint32_t adcValue0MicroVolt;
 uint16_t adcValue1;
 uint32_t adcValue1MicroVolt;
+uint16_t adcValue2;
+uint32_t adcValue2MicroVolt;
 
 
 /*=============================================================================
@@ -417,7 +419,7 @@ PROCESS_THREAD(sc_app_process, ev, data)
 PROCESS_THREAD(adc_sb_process, ev, data)
 {
     static struct etimer et;
-    int sampling_freq = 10000; //use 10000 for 10kHz sampling
+    int sampling_freq = 10; //use 10000 for 10kHz sampling
 
     PROCESS_BEGIN();
     etimer_set(&et, (clock_time_t)CLOCK_SECOND/sampling_freq); /* Trigger a timer after 0.1 millisecond. */
@@ -441,16 +443,17 @@ PROCESS_THREAD(adc_sb_process, ev, data)
 
       ADC_Handle adc_ct;
       ADC_Handle adc_vtg;
+      ADC_Handle adc_temp;
       ADC_Params params;
       int_fast16_t res_ct;
       int_fast16_t res_vtg;
-      uint_least8_t adc_index_ct = 6; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
-      uint_least8_t adc_index_vtg = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30.
+      int_fast16_t res_temp;
+      uint_least8_t adc_index_vtg = 7; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30, index = 5 for temperature
+      uint_least8_t adc_index_ct = 6; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30, index = 5 for temperature
+      uint_least8_t adc_index_temp = 5; // index = 6 for current, IOID_29 and index = 7 for voltage, IOID_30, index = 5 for temperature
 
       ADC_Params_init(&params);
       adc_ct = ADC_open(adc_index_ct, &params);
-      adc_vtg = ADC_open(adc_index_vtg, &params);
-
       /* Blocking mode conversion */
       res_ct = ADC_convert(adc_ct, &adcValue1);
 
@@ -462,6 +465,7 @@ PROCESS_THREAD(adc_sb_process, ev, data)
       }
       ADC_close(adc_ct);
 
+      adc_vtg = ADC_open(adc_index_vtg, &params);
       res_vtg = ADC_convert(adc_vtg, &adcValue0);
 
       if (res_vtg == ADC_STATUS_SUCCESS)
@@ -470,8 +474,19 @@ PROCESS_THREAD(adc_sb_process, ev, data)
           adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc_vtg, adcValue0);
       }
 
-
       ADC_close(adc_vtg);
+
+      adc_temp = ADC_open(adc_index_temp, &params);
+      res_temp = ADC_convert(adc_temp, &adcValue2);
+
+      if (res_temp == ADC_STATUS_SUCCESS)
+      {
+
+          adcValue2MicroVolt = ADC_convertRawToMicroVolts(adc_temp, adcValue2);
+      }
+
+
+      ADC_close(adc_temp);
 
     }
 
