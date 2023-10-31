@@ -86,8 +86,12 @@
 #include "CC26X2R1_LAUNCHXL.h"
 #include <ti/drivers/timer/GPTimerCC26XX.h>
 
+#include <ti/drivers/PWM.h>
+
 void timerCallback(Timer_Handle myHandle, int_fast16_t status);
 int ti_timer_check = 0;
+float poll_period_test = 0.0;
+int pwm_check = 0;
 
 /*---------------------------------------------------------------------------*/
 /* Log configuration */
@@ -171,6 +175,8 @@ main(void)
   platform_init_stage_three();
 
 
+
+
 #if BUILD_WITH_RPL_BORDER_ROUTER
   rpl_border_router_init();
   LOG_DBG("With RPL Border Router\n");
@@ -209,17 +215,12 @@ main(void)
 
   watchdog_start();
 
-
-
-
-
-
 /*Timer code:
  * TBD: Move to a separate function
  *
  *                        */
 
-//  //Timer_init();
+//  Timer_init();
 //  Timer_Handle timer0;
 //  Timer_Params params;
 //
@@ -248,8 +249,8 @@ main(void)
 //      /* Failed to start timer */
 //      while (1) {}
 //  }
-
-//////
+//
+////////
 
 
 
@@ -268,10 +269,33 @@ main(void)
     uint8_t r;
     do {
       r = process_run();
+//     Here we can call a function. This is repeated at about 100kHz rate or more.
+//     Try timer or any other code.
+
+
+//      if(pwm_check<5)
+//          pwm_check++;
+//      else
+//          pwm_check=0;
+//
+//      if(pwm_check<2)
+       GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM);
+
+
+
+
       watchdog_periodic();
     } while(r > 0);
 
-//    platform_idle();
+
+
+
+
+
+
+
+
+//    platform_idle(); // Never uncomment this. Gives problems on our PCBs but works on launchpads.
   }
 #endif
 
@@ -284,10 +308,10 @@ main(void)
 
 
 /*timer0 call back function*/
-void timerCallback(Timer_Handle myHandle, int_fast16_t status)
-{
-    if(ti_timer_check<60)
-        ti_timer_check++;
-    else
-        ti_timer_check=0;
-}
+//void timerCallback(Timer_Handle myHandle, int_fast16_t status)
+//{
+//    if(ti_timer_check<60)
+//        ti_timer_check++;
+//    else
+//        ti_timer_check=0;
+//}

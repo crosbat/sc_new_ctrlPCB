@@ -95,6 +95,8 @@ uint16_t adcValue1;
 uint32_t adcValue1MicroVolt;
 uint16_t adcValue2;
 uint32_t adcValue2MicroVolt;
+float temp_in_celsius=0.0;
+float v_batt_sense = 0.0;
 
 
 /*=============================================================================
@@ -220,7 +222,6 @@ PROCESS_THREAD(button_process, ev, data)
           {
             sf_led_flash(LEDS_CONF_GREEN);
           }
-          GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM);
           GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_LED1);
         }
       }
@@ -419,10 +420,10 @@ PROCESS_THREAD(sc_app_process, ev, data)
 PROCESS_THREAD(adc_sb_process, ev, data)
 {
     static struct etimer et;
-    int sampling_freq = 10; //use 10000 for 10kHz sampling
+    int sampling_freq = 0.1; //use 10000 for 10kHz sampling
 
     PROCESS_BEGIN();
-    etimer_set(&et, (clock_time_t)CLOCK_SECOND/sampling_freq); /* Trigger a timer after 0.1 millisecond. */
+    etimer_set(&et, (clock_time_t)sampling_freq); /* Trigger a timer after 0.1 millisecond. */
     while(1) {
       PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&et));
       etimer_reset(&et);
@@ -435,7 +436,7 @@ PROCESS_THREAD(adc_sb_process, ev, data)
 
       if(dispDownlink < 18)
       {
-          GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM); //This should create a PWM initially once this process starts
+          //GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM); //This should create a PWM initially once this process starts
       }
 
 
@@ -488,6 +489,10 @@ PROCESS_THREAD(adc_sb_process, ev, data)
 
       ADC_close(adc_temp);
 
+      temp_in_celsius = adcValue2MicroVolt*0.00001251 + 4.518; // Using linear fit based on experimental data
+      v_batt_sense = adcValue0MicroVolt*0.000003; // scaled down gain is 1/3 in the schematic, so we multiply by 3e-6 on the microvolt value of the adc
+
+
     }
 
     PROCESS_END();
@@ -523,8 +528,8 @@ __attribute__((weak)) void sf_app_handleDownlink(uint8_t* pInBuf, uint8_t length
   //we will use a condition to bypass based on the value of dispDownlink.
   if(dispDownlink > 18)
   {
-      GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM);
-      GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_LED1);
+//      GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_PWM);
+      GPIO_toggleDio(CC26X2R1_LAUNCHXL_SB_LED1); //This is IOID 5, LED2 is IOID 4.
   }
 
 } /* sf_app_handleDownlink() */

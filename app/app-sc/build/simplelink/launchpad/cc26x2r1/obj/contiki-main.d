@@ -102,6 +102,7 @@ build/simplelink/launchpad/cc26x2r1/obj/contiki-main.o: \
  c:\users\crosbat\documents\sc-ctrl-v2\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_event.h \
  C:/Users/Crosbat/Documents/sc-ctrl-v2/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/devices/cc13x2_cc26x2/driverlib/timer.h \
  c:\users\crosbat\documents\sc-ctrl-v2\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpt.h \
+ C:/Users/Crosbat/Documents/sc-ctrl-v2/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/PWM.h \
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h
 \ :
@@ -208,5 +209,6 @@ build/simplelink/launchpad/cc26x2r1/obj/contiki-main.o: \
 \users\crosbat\documents\sc-ctrl-v2\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_event.h \ :
 /Users/Crosbat/Documents/sc-ctrl-v2/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/devices/cc13x2_cc26x2/driverlib/timer.h \ :
 \users\crosbat\documents\sc-ctrl-v2\modules\thirdparty\sf-contiki-ng\arch\cpu\simplelink-cc13xx-cc26xx\lib\simplelink_cc13x2_26x2_sdk_4_40_04_04\source\ti\devices\cc13x2_cc26x2\inc\hw_gpt.h \ :
+/Users/Crosbat/Documents/sc-ctrl-v2/modules/thirdparty/sf-contiki-ng/arch/cpu/simplelink-cc13xx-cc26xx/lib/simplelink_cc13x2_26x2_sdk_4_40_04_04/source/ti/drivers/PWM.h \ :
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log.h \ :
  ../../modules/thirdparty/sf-contiki-ng/os/sys/log-conf.h :
